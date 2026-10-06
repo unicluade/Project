@@ -7,6 +7,7 @@ data/raw/ 는 .gitignore에 들어 있습니다(용량·저작권).
 이 스크립트가 있으면 누구나 같은 상태를 재현할 수 있습니다.
 ★ 포트폴리오에서 "재현 가능한가"는 생각보다 크게 봅니다.
 """
+
 from __future__ import annotations
 
 import hashlib
@@ -22,7 +23,7 @@ RAW = ROOT / "data" / "raw"
 SOURCES = {
     "ai4i": {
         "url": "https://archive.ics.uci.edu/static/public/601/"
-               "ai4i+2020+predictive+maintenance+dataset.zip",
+        "ai4i+2020+predictive+maintenance+dataset.zip",
         "expect": ["ai4i2020.csv"],
     },
     "secom": {
@@ -42,8 +43,9 @@ def fetch(name: str, spec: dict) -> bool:
     zpath = RAW / f"{name}.zip"
     print(f"[get ] {name} ← {spec['url']}")
     try:
-        r = requests.get(spec["url"], timeout=120,
-                         headers={"User-Agent": "Mozilla/5.0"})
+        r = requests.get(
+            spec["url"], timeout=120, headers={"User-Agent": "Mozilla/5.0"}
+        )
         r.raise_for_status()
     except Exception as e:
         print(f"[FAIL] {name}: {type(e).__name__}: {e}")
